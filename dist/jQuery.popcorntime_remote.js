@@ -84,6 +84,70 @@
             APIcall("ping");
         }
 
+        plugin.previousseason = function() {
+            APIcall("previousseason");
+        }
+
+        plugin.nextseason = function() {
+            APIcall("nextseason");
+        }
+
+        plugin.togglemute = function() {
+            APIcall("togglemute");
+        }
+
+        plugin.togglefullscreen = function() {
+            APIcall("togglefullscreen");
+        }
+
+        plugin.togglefavourite = function() {
+            APIcall("togglefavourite");
+        }
+
+        plugin.toggletab = function() {
+            APIcall("toggletab");
+        }
+
+        plugin.togglewatched = function() {
+            APIcall("togglewatched");
+        }
+
+        plugin.togglequality = function() {
+            APIcall("togglequality");
+        }
+
+        plugin.showslist = function() {
+            APIcall("showslist");
+        }
+
+        plugin.animelist = function() {
+            APIcall("animelist");
+        }
+
+        plugin.movieslist = function() {
+            APIcall("movieslist");
+        }
+
+        plugin.showwatchlist = function() {
+            APIcall("showwatchlist");
+        }
+
+        plugin.showfavourites = function() {
+            APIcall("showfavourites");
+        }
+
+        plugin.showabout = function() {
+            APIcall("showabout");
+        }
+        
+        plugin.showsettings = function() {
+            APIcall("showsettings");
+        }
+
+        plugin.watchtrailer = function() {
+            APIcall("watchtrailer");
+        }
+
         plugin.up = function() {
             APIcall("up");
         }
@@ -104,9 +168,11 @@
             APIcall("enter");
         }
 
-        plugin.movieslist = function() {
-            APIcall("movieslist");
+        plugin.back = function() {
+            APIcall("back");
         }
+
+        
 
         init();
 
