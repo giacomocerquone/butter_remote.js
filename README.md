@@ -1,5 +1,6 @@
 # jQuery.popcorntime_remote
-Popcorntime_remote is a jQuery plugin that provides an easy way to make an application or whatever you want to control the interface of [popcorn time](http://www.google.it) through the json rpc protocol. The plugin is developed with simplicity in mind so, for example, the methods name are the same that you can find in the [popcorn time documention](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md) and there are many other conveniences.
+Popcorntime_remote is a jQuery plugin that provides an easy way to make an application or whatever you want to control the interface of [popcorn time](http://www.google.it) through the json rpc protocol.<br>
+The plugin is developed with simplicity in mind so, for example, the methods name are the same that you can find in the [popcorn time documention](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md) and there are many other conveniences.
 
 ##Download
 You can get the plugin in different ways:
@@ -19,6 +20,6 @@ First include jQuery and after this plugin on the page you want to use it.
 
 
 ##License
-Released under the GNU 3 license.
-Copyright © 2015, Giacomo cerquone.
+Released under the GNU 3 license.<br>
+Copyright © 2015, Giacomo cerquone.<br>
 All rights reserved.
