@@ -71,7 +71,6 @@
             log(data);
         }
 
-
         var log = function(msg) {
             if (options.debug == true) console.log(msg);
         }
@@ -79,100 +78,113 @@
 
         /* PUBLIC METHODS */
 
-
+        //Everywhere
         plugin.ping = function() {
             APIcall("ping");
         }
-
-        plugin.previousseason = function() {
-            APIcall("previousseason");
-        }
-
-        plugin.nextseason = function() {
-            APIcall("nextseason");
-        }
-
-        plugin.togglemute = function() {
-            APIcall("togglemute");
-        }
-
-        plugin.togglefullscreen = function() {
-            APIcall("togglefullscreen");
-        }
-
-        plugin.togglefavourite = function() {
-            APIcall("togglefavourite");
-        }
-
-        plugin.toggletab = function() {
-            APIcall("toggletab");
-        }
-
-        plugin.togglewatched = function() {
-            APIcall("togglewatched");
-        }
-
-        plugin.togglequality = function() {
-            APIcall("togglequality");
-        }
-
-        plugin.showslist = function() {
-            APIcall("showslist");
-        }
-
-        plugin.animelist = function() {
-            APIcall("animelist");
-        }
-
-        plugin.movieslist = function() {
-            APIcall("movieslist");
-        }
-
-        plugin.showwatchlist = function() {
-            APIcall("showwatchlist");
-        }
-
-        plugin.showfavourites = function() {
-            APIcall("showfavourites");
-        }
-
-        plugin.showabout = function() {
-            APIcall("showabout");
-        }
-        
-        plugin.showsettings = function() {
-            APIcall("showsettings");
-        }
-
-        plugin.watchtrailer = function() {
-            APIcall("watchtrailer");
-        }
-
-        plugin.up = function() {
-            APIcall("up");
-        }
-
-        plugin.down = function() {
-            APIcall("down");
-        }
-
-        plugin.right = function() {
-            APIcall("right");
-        }
-
-        plugin.left = function() {
-            APIcall("left");
-        }
-
         plugin.enter = function() {
             APIcall("enter");
         }
-
         plugin.back = function() {
             APIcall("back");
         }
 
         
+        plugin.getviewstack = function() {
+            APIcall("getviewstack");
+        }
+
+
+        //Tv Show Detail
+        plugin.nextseason = function() {
+            APIcall("nextseason");
+        }
+        plugin.previousseason = function() {
+            APIcall("previousseason");
+        }
+
+
+        //Movie Detail
+        plugin.togglequality = function() {
+            APIcall("togglequality");
+        }
+        plugin.watchtrailer = function() {
+            APIcall("watchtrailer");
+        }
+
+
+        //Player
+        plugin.togglemute = function() {
+            APIcall("togglemute");
+        }
+        plugin.togglefullscreen = function() {
+            APIcall("togglefullscreen");
+        }
+
+
+        //Main Browser
+        plugin.toggletab = function() {
+            APIcall("toggletab");
+        }
+        plugin.showslist = function() {
+            APIcall("showslist");
+        }
+        plugin.animelist = function() {
+            APIcall("animelist");
+        }
+        plugin.movieslist = function() {
+            APIcall("movieslist");
+        }
+        
+        plugin.showwatchlist = function() {
+            APIcall("showwatchlist");
+        }
+        plugin.showfavourites = function() {
+            APIcall("showfavourites");
+        }
+        plugin.showabout = function() {
+            APIcall("showabout");
+        }
+        plugin.showsettings = function() {
+            APIcall("showsettings");
+        }
+
+        plugin.togglewatched = function() {
+            APIcall("togglewatched");
+        }
+        plugin.togglefavourite = function() {
+            APIcall("togglefavourite");
+        }
+
+        plugin.clearsearch = function() {
+            APIcall("clearsearch");
+        }
+
+        plugin.filtergenre = function(params) {
+            APIcall("filtergenre", params);
+        }
+        plugin.filtersorter = function(params) {
+            APIcall("filtersorter", params);
+        }
+        plugin.filtertype = function(params) {
+            APIcall("filtertype", params);
+        }
+        plugin.filtersearch = function(params) {
+            APIcall("filtersearch", params);
+        }
+
+        plugin.up = function() {
+            APIcall("up");
+        }
+        plugin.down = function() {
+            APIcall("down");
+        }
+        plugin.right = function() {
+            APIcall("right");
+        }
+        plugin.left = function() {
+            APIcall("left");
+        }
 
         init();
 
