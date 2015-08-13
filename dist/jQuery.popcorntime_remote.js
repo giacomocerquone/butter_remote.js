@@ -10,7 +10,8 @@
     $.popcorntime_remote = function(options) {
 
         var plugin      = this,
-            isConnected = true;
+            isConnected = true,
+            view        = "";
 
         var init = function() {
 
@@ -23,7 +24,8 @@
             }, options);
 
             log('Initializing popcorntime_remote');
-            //plugin.ping();
+            plugin.ping();
+            //plugin.listennotifications();
 
         }
 
@@ -51,6 +53,9 @@
                     handleData(data, api_method);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
+                    if (api_method == 'listennotifications') {
+                        return plugin.listennotifications();
+                    }
                     log("Connection time out: can't reach popcorn time. Try changing the settings.");
                     isConnected = "false";
                 },
@@ -68,11 +73,20 @@
                 }
             }
 
+            /*if (method == "listennotifications") {
+                log(data);
+                return plugin.listennotifications();
+            }*/
+
             log(data);
         }
 
         var log = function(msg) {
             if (options.debug == true) console.log(msg);
+        }
+
+        plugin.listennotifications = function() {
+            APIcall("listennotifications");
         }
 
 
@@ -88,8 +102,6 @@
         plugin.back = function() {
             APIcall("back");
         }
-
-        
         plugin.getviewstack = function() {
             APIcall("getviewstack");
         }
