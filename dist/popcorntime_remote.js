@@ -16,16 +16,17 @@ var lib,
         debug: false
 },
 popcorntime_remote = {
-    
+
+    //LIB METHODS
     init: function(user_opt) {
-        user_opt = $.extend(opt, user_opt);
         lib = this;
 
+        user_opt = lib.extend(opt, user_opt);
         lib.log('Initializing popcorntime_remote');
         lib.ping();
     },
 
-    APIcall: function(api_method, api_params) {
+    APIcall: function(api_method, api_params, callback) {
 
         request         = {};
         request.id      = Math.floor((Math.random() * 100) + 1);
@@ -33,7 +34,7 @@ popcorntime_remote = {
         request.method  = api_method;
         request.params  = (api_params) ? api_params : [];
 
-        $.ajax({
+        /*$.ajax({
             type: "POST",
             url: "http://" + opt.ip + ":" + opt.port,
             data: JSON.stringify(request),
@@ -43,13 +44,35 @@ popcorntime_remote = {
             },
             success: function(data) {
                 lib.handleData(data, api_method);
+                if(callback) callback(data);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 lib.log("Connection time out: can't reach popcorn time. Try changing the settings.");
                 isConnected = "false";
             },
             dataType: "json"
-        });
+        });*/
+
+        var ajax = new XMLHttpRequest();
+        ajax.open('POST', "http://" + opt.ip + ":" + opt.port, true);
+        ajax.setRequestHeader('Authorization', window.btoa(opt.username + ":" + opt.password));
+        ajax.setRequestHeader('Accept', 'application/json;');
+
+        ajax.onreadystatechange = function() {
+          if (this.readyState === 4) {
+            if (this.readyState == 4 && this.status == 200) {
+                data = JSON.parse(this.responseText);
+                lib.handleData(data, api_method);
+                if(callback) callback(data);
+            } else {
+                lib.log("Connection time out: can't reach popcorn time. Try changing the settings.");
+                isConnected = "false";
+            }
+          }
+        };
+
+        ajax.send(JSON.stringify(request));
+        ajax = null;
 
     },
 
@@ -62,7 +85,10 @@ popcorntime_remote = {
             }
 
         }
-        
+
+        if(method == "getgenres") {
+        }
+
         lib.log(data);
 
     },
@@ -70,6 +96,24 @@ popcorntime_remote = {
     log: function(msg) {
         if (opt.debug == true) console.log(msg);
     },
+
+    extend: function(out) {
+      out = out || {};
+
+      for (var i = 1; i < arguments.length; i++) {
+        if (!arguments[i])
+          continue;
+
+        for (var key in arguments[i]) {
+          if (arguments[i].hasOwnProperty(key))
+            out[key] = arguments[i][key];
+        }
+      }
+
+      return out;
+    },
+
+    //POPCORNTIME METHODS
 
     //Everywhere
     ping: function() { lib.APIcall("ping"); },
@@ -110,6 +154,8 @@ popcorntime_remote = {
     up: function() { lib.APIcall("up"); },
     down: function() { lib.APIcall("down"); },
     right: function() { lib.APIcall("right"); },
-    left: function() { lib.APIcall("left"); }
+    left: function() { lib.APIcall("left"); },
+
+    getgenres: function(callback) { lib.APIcall("getgenres", false, callback); }
 
 };
