@@ -57,6 +57,7 @@ popcorntime_remote = {
         ajax.open('POST', "http://" + opt.ip + ":" + opt.port, true);
         ajax.setRequestHeader('Authorization', window.btoa(opt.username + ":" + opt.password));
         ajax.setRequestHeader('Accept', 'application/json;');
+        ajax.timeout = (api_method == 'listennotifications') ? 60000 : 3000;
 
         ajax.onreadystatechange = function() {
           if (this.readyState === 4) {
@@ -116,46 +117,56 @@ popcorntime_remote = {
     //POPCORNTIME METHODS
 
     //Everywhere
-    ping: function() { lib.APIcall("ping"); },
-    enter: function() { lib.APIcall("enter"); },
-    back: function() { lib.APIcall("back"); },
-    getviewstack: function() { lib.APIcall("getviewstack"); },
+    ping:               function() { lib.APIcall("ping"); },
+    enter:              function() { lib.APIcall("enter"); },
+    back:               function() { lib.APIcall("back"); },
+    getviewstack:       function() { lib.APIcall("getviewstack"); },
+    getgenres:          function(callback) { lib.APIcall("getgenres", false, callback); },
+    getsorters:         function(callback) { lib.APIcall("getsorters", false, callback); },
+    gettypes:           function(callback) { lib.APIcall("gettypes", false, callback); },
+    getcurrenttab:      function(callback) { lib.APIcall("getcurrenttab", false, callback); },
 
     //Tv Show Detail
-    nextseason: function() { lib.APIcall("nextseason"); },
-    previousseason: function() { lib.APIcall("previousseason"); },
+    nextseason:         function() { lib.APIcall("nextseason"); },
+    previousseason:     function() { lib.APIcall("previousseason"); },
+
     //Movie Detail
-    togglequality: function() { lib.APIcall("togglequality"); },
-    watchtrailer: function() { lib.APIcall("watchtrailer"); },
+    togglequality:      function() { lib.APIcall("togglequality"); },
+    watchtrailer:       function() { lib.APIcall("watchtrailer"); },
+
     //Player
-    togglemute: function() { lib.APIcall("togglemute"); },
-    togglefullscreen: function() { lib.APIcall("togglefullscreen"); },
+    togglemute:         function() { lib.APIcall("togglemute"); },
+    togglefullscreen:   function() { lib.APIcall("togglefullscreen"); },
+    setvolume:          function(params) { lib.APIcall("volume", params); },
+    toggleplaying:      function() { lib.APIcall("toggleplaying"); },
+    getplaying:         function(callback) { lib.APIcall("getplaying", false, callback) },
+
     //Main Browser
-    toggletab: function() { lib.APIcall("toggletab"); },
-    showslist: function() { lib.APIcall("showslist"); },
-    animelist: function() { lib.APIcall("animelist"); },
-    movieslist: function() { lib.APIcall("movieslist"); },
+    toggletab:          function() { lib.APIcall("toggletab"); },
+    showslist:          function() { lib.APIcall("showslist"); },
+    animelist:          function() { lib.APIcall("animelist"); },
+    movieslist:         function() { lib.APIcall("movieslist"); },
 
-    showwatchlist: function() { lib.APIcall("showwatchlist"); },
-    showfavourites: function() { lib.APIcall("showfavourites"); },
-    showabout: function() { lib.APIcall("showabout"); },
-    showsettings: function() { lib.APIcall("showsettings"); },
+    showwatchlist:      function() { lib.APIcall("showwatchlist"); },
+    showfavourites:     function() { lib.APIcall("showfavourites"); },
+    showabout:          function() { lib.APIcall("showabout"); },
+    showsettings:       function() { lib.APIcall("showsettings"); },
 
-    togglewatched: function() { lib.APIcall("togglewatched"); },
-    togglefavourite: function() { lib.APIcall("togglefavourite"); },
+    togglewatched:      function() { lib.APIcall("togglewatched"); },
+    togglefavourite:    function() { lib.APIcall("togglefavourite"); },
 
-    clearsearch: function() { lib.APIcall("clearsearch"); },
+    clearsearch:        function() { lib.APIcall("clearsearch"); },
 
-    filtergenre: function(params) { lib.APIcall("filtergenre", params); },
-    filtersorter: function(params) { lib.APIcall("filtersorter", params); },
-    filtertype: function(params) { lib.APIcall("filtertype", params); },
-    filtersearch: function(params) { lib.APIcall("filtersearch", params); },
+    filtergenre:        function(params) { lib.APIcall("filtergenre", params); },
+    filtersorter:       function(params) { lib.APIcall("filtersorter", params); },
+    filtertype:         function(params) { lib.APIcall("filtertype", params); },
+    filtersearch:       function(params) { lib.APIcall("filtersearch", params); },
 
-    up: function() { lib.APIcall("up"); },
-    down: function() { lib.APIcall("down"); },
-    right: function() { lib.APIcall("right"); },
-    left: function() { lib.APIcall("left"); },
+    up:                 function() { lib.APIcall("up"); },
+    down:               function() { lib.APIcall("down"); },
+    right:              function() { lib.APIcall("right"); },
+    left:               function() { lib.APIcall("left"); }
 
-    getgenres: function(callback) { lib.APIcall("getgenres", false, callback); }
+
 
 };
