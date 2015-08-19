@@ -7,7 +7,7 @@
 */
 var lib,
     isConnected = true,
-    view = "",
+    view = [],
     opt = {
         username: "popcorn", 
         password: "popcorn",
@@ -64,8 +64,12 @@ popcorntime_remote = {
             if (this.readyState == 4 && this.status == 200) {
                 data = JSON.parse(this.responseText);
                 lib.handleData(data, api_method);
+
                 if(callback) callback(data);
             } else {
+                if (api_method == 'listennotifications')
+                    return lib.listennotifications();
+
                 lib.log("Connection time out: can't reach popcorn time. Try changing the settings.");
                 isConnected = "false";
             }
@@ -84,14 +88,15 @@ popcorntime_remote = {
                 lib.log("Invalid login: Check username and password.");
                 isConnected = false;
             }
-
         }
 
-        if(method == "getgenres") {
+        if (method == "listennotifications") {
+            lib.log(data);
+            return lib.listennotifications();
         }
 
         lib.log(data);
-
+        lib.listennotifications();
     },
 
     log: function(msg) {
@@ -129,7 +134,7 @@ popcorntime_remote = {
     getplayers:         function(callback) { lib.APIcall("getplayers", false, callback); },
     startstream:        function(params) { lib.APIcall("startstream", params); },
     setplayer:          function(params) { lib.APIcall("setplayer", params); },
-    
+    listennotifications:function() { lib.APIcall("listennotifications"); },
 
     //Tv Show Detail
     nextseason:         function() { lib.APIcall("nextseason"); },
@@ -181,7 +186,5 @@ popcorntime_remote = {
     down:               function() { lib.APIcall("down"); },
     right:              function() { lib.APIcall("right"); },
     left:               function() { lib.APIcall("left"); }
-
-
 
 };
