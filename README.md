@@ -37,25 +37,25 @@ Pretty simple uh?
 ##Usage
 As you can understand from the popcorn time documentation, there are "three kinds" of methods.
 
-1. Methods which performs actions without any parameter needed.<br>
-  These are {listing methods}:<br>
-  ```javascript
-  popcorntime_remote.ping();
-  ```
-2. Methods that need parameters to performs certain actions.<br>
-  These are {listing methods}:<br>
-  ```javascript
-  popcorntime_remote.filtergenres(["Adventure"]);
-  ```
-3. Methods which performs actions and return some data. Here you have a callback function and the data can be accessed in this way:
-  ```javascript
-  //This get the current volume in the player
-  popcorntime_remote.volume(function(data) {
-    console.log(data);
-  });
-  //This set the current volume in the player
-  popcorntime_remote.volume([2]);
-  ```
+##### Methods which performs actions without any parameter needed.<br>
+These are {listing methods}:<br>
+```javascript
+popcorntime_remote.ping();
+```
+##### Methods that need parameters to performs certain actions.<br>
+These are {listing methods}:<br>
+```javascript
+popcorntime_remote.filtergenres(["Adventure"]);
+```
+##### Methods which performs actions and return some data. Here you have a callback function and the data can be accessed in this way:
+```javascript
+//This get the current volume in the player
+popcorntime_remote.volume(function(data) {
+  console.log(data);
+});
+//This set the current volume in the player
+popcorntime_remote.volume([2]);
+```
 
 ##Conclusion
 If you don't know if parameters are needed or what you have to pass to the methods and for every other information, as I already said, you can look at the [popcorn time documentation](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md). Despite that doc has been written with the json rpc protocol in mind, the information about the usage of the methods are compatible for this library too... actually you will not even notice that you're using this library.
