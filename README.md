@@ -1,6 +1,6 @@
 # popcorntime_remote.js
-Popcorntime_remote is a javascript library that provides an easy way to make an application or whatever you want to control the interface of [popcorn time](https://popcorntime.io/) through the json rpc protocol.<br>
-The plugin is developed with simplicity in mind so, for example, the methods name are the same that you can find in the [popcorn time documention](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md) and there are many other conveniences.
+popcorntime_remote.js is a javascript library that provides an easy way to make an application or whatever you want to control the interface of [popcorn time](https://popcorntime.io/) through the json rpc protocol.<br>
+The plugin is developed with simplicity in mind so the methods name are the same that you can find in the [popcorn time documention](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md) and there are many other conveniences.
 
 ##Download
 You can get the plugin in different ways:
