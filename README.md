@@ -47,7 +47,8 @@ These are {listing methods}:<br>
 ```javascript
 popcorntime_remote.filtergenres(["Adventure"]);
 ```
-##### Methods which performs actions and return some data. Here you have a callback function and the data can be accessed in this way:
+##### Methods which performs actions and return some data.<br>
+Here you have a callback function and the data can be accessed in this way:
 ```javascript
 //This get the current volume in the player
 popcorntime_remote.volume(function(data) {
