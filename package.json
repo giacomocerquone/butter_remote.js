@@ -1,0 +1,9 @@
+{
+  "name": "popcorntime_remote.js",
+  "devDependencies": {
+    "uglify": "latest"
+  },
+  "scripts": {
+    "uglify": "uglify -s dist/popcorntime_remote.js -o dist/popcorntime_remote.min.js"
+  }
+}
