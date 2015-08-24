@@ -6,6 +6,7 @@
     This library is released under the GPL 3 license.
 */
 var lib,
+view = null,
 popcorntime_remote = {
 
     //LIB PROPERTIES
@@ -25,7 +26,9 @@ popcorntime_remote = {
         user_opt = lib.extend(lib.opt, user_opt);
         lib.log('Initializing popcorntime_remote');
         lib.ping();
-        lib.listennotifications();
+        lib.listennotifications(function(data) {
+            view = data.result.events.viewstack;
+        });
     },
 
     APIcall: function(api_method, api_params, callback) {
@@ -51,7 +54,9 @@ popcorntime_remote = {
                 if(callback) callback(data);
             } else {
                 if (api_method == 'listennotifications') {
-                    return lib.listennotifications();
+                    return lib.listennotifications(function(data) {
+                        view = data.result.events.viewstack;
+                    });
                 }
 
                 lib.log("Connection time out: can't reach popcorn time. Try changing the settings.");
@@ -76,7 +81,9 @@ popcorntime_remote = {
 
         if (method == "listennotifications") {
             lib.log(data);
-            return lib.listennotifications();
+            return lib.listennotifications(function(data) {
+                view = data.result.events.viewstack;
+            });
         }
 
         lib.log(data);
@@ -106,7 +113,7 @@ popcorntime_remote = {
     ping:               function() { lib.APIcall("ping"); },
     enter:              function() { lib.APIcall("enter"); },
     back:               function() { lib.APIcall("back"); },
-    getviewstack:       function() { lib.APIcall("getviewstack"); },
+    getviewstack:       function(callback) { lib.APIcall("getviewstack", false, callback); },
     getgenres:          function(callback) { lib.APIcall("getgenres", false, callback); },
     getsorters:         function(callback) { lib.APIcall("getsorters", false, callback); },
     gettypes:           function(callback) { lib.APIcall("gettypes", false, callback); },
@@ -115,7 +122,7 @@ popcorntime_remote = {
     getplayers:         function(callback) { lib.APIcall("getplayers", false, callback); },
     startstream:        function(params) { lib.APIcall("startstream", params); },
     setplayer:          function(params) { lib.APIcall("setplayer", params); },
-    listennotifications:function() { lib.APIcall("listennotifications"); },
+    listennotifications:function(callback) { lib.APIcall("listennotifications", false, callback); },
     nextseason:         function() { lib.APIcall("nextseason"); },
     previousseason:     function() { lib.APIcall("previousseason"); },
     selectepisode:      function(params) { lib.APIcall("selectepisode", params); },
