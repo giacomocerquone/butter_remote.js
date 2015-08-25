@@ -3,7 +3,11 @@ popcorntime_remote.js is a javascript library that provides an easy way to make 
 The plugin is developed with simplicity in mind so the methods name are the same that you can find in the [popcorn time documention](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md) and there are many other conveniences.
 
 ##Download
-You can get the plugin downloading the raw file in the dist folder choosing the [clean](https://raw.githubusercontent.com/giacomocerquone/popcorntime_remote.js/master/dist/popcorntime_remote.js) or [minified](https://raw.githubusercontent.com/giacomocerquone/popcorntime_remote.js/master/dist/popcorntime_remote.min.js) version.
+You can get the plugin in different ways:
+
+1. Downloading the raw file in the dist folder choosing the [clean](https://raw.githubusercontent.com/giacomocerquone/popcorntime_remote.js/master/dist/popcorntime_remote.js) or [minified](https://raw.githubusercontent.com/giacomocerquone/popcorntime_remote.js/master/dist/popcorntime_remote.min.js) version.
+2. If you want to take a look at the demo, you can directly [download the repo](https://github.com/giacomocerquone/jQuery.popcorntime_remote/archive/master.zip).
+3. Go to the releases tab and download the [Source code.zip]()
 
 ##Include and Initialize
 Firstly you should obviously include the library on the page you want to use it:
