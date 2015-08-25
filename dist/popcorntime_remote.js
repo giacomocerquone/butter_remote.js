@@ -6,7 +6,6 @@
     This library is released under the GPL 3 license.
 */
 var lib,
-view = null,
 popcorntime_remote = {
 
     //LIB PROPERTIES
@@ -26,9 +25,6 @@ popcorntime_remote = {
         user_opt = lib.extend(lib.opt, user_opt);
         lib.log('Initializing popcorntime_remote');
         lib.ping();
-        lib.listennotifications(function(data) {
-            view = data.result.events.viewstack;
-        });
     },
 
     APIcall: function(api_method, api_params, callback) {
@@ -43,7 +39,7 @@ popcorntime_remote = {
         ajax.open('POST', "http://" + lib.opt.ip + ":" + lib.opt.port, true);
         ajax.setRequestHeader('Authorization', window.btoa(lib.opt.username + ":" + lib.opt.password));
         ajax.setRequestHeader('Accept', 'application/json;');
-        ajax.timeout = (api_method == 'listennotifications') ? 60000 : 3000;
+        ajax.timeout = 3000;
 
         ajax.onreadystatechange = function() {
           if (this.readyState === 4) {
@@ -53,11 +49,7 @@ popcorntime_remote = {
 
                 if(callback) callback(data);
             } else {
-                if (api_method == 'listennotifications') {
-                    return lib.listennotifications(function(data) {
-                        view = data.result.events.viewstack;
-                    });
-                }
+ 
 
                 lib.log("Connection time out: can't reach popcorn time. Try changing the settings.");
                 lib.isConnected = "false";
@@ -79,12 +71,6 @@ popcorntime_remote = {
             }
         }
 
-        if (method == "listennotifications") {
-            lib.log(data);
-            return lib.listennotifications(function(data) {
-                view = data.result.events.viewstack;
-            });
-        }
 
         lib.log(data);
     },
