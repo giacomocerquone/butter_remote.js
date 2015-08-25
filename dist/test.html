@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>TITLE</title>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="popcorntime_remote.js"></script>
+</head>
+<body>
+	<div style="width:5em; height:5em; border:1px solid #000;" class="asd"></div> 
+
+	<script>
+		popcorntime_remote.init({debug:true});
+
+		if(view[view.length-1] == "mainbrowser") {
+			$('.asd').text("mainbrowser");
+		} else if(view[view.length-1] == "movie-detail") {
+			$('.asd').text("movie-detail");
+		}
+	</script>
+</body>
+</html>
