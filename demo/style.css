@@ -1,3 +1,39 @@
 body {
 	font-family: Arial 16px/21 sans-serif;
+	background:#f9f9f9;
+	color:#62706c;
+	text-align: center;
+}
+main {
+	display:block;
+}
+h1 {
+	font-size:1.25em;
+	font-weight: 200;
+}
+h2 {
+	font-size:1em;
+	font-weight: 200;
+}
+
+/* LOGIN BOX */
+#login {
+	width:38.75em;
+	height:20em;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-left:-19em;
+	margin-top:-10em;
+}
+#options > label {
+	text-transform: uppercase;
+}
+#options > input {
+	outline:0;
+	border:2px solid #485753;
+	background:#f7f7f7;
+	padding:1em;
+	font-size:14px;
+	font-weight: 200;
 }
