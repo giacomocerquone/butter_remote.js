@@ -19,16 +19,13 @@ popcorntime_remote = {
     },
 
     //LIB METHODS
-    init: function(user_opt) {
+    init: function(user_opt, callback) {
         lib = this;
-
         user_opt = lib.extend(lib.opt, user_opt);
-        lib.log('Initializing popcorntime_remote');
-        lib.ping();
+        lib.ping(callback);
     },
 
     APIcall: function(api_method, api_params, callback) {
-
         request         = {};
         request.id      = Math.floor((Math.random() * 100) + 1);
         request.jsonrpc = '2.0';
@@ -96,7 +93,7 @@ popcorntime_remote = {
     },
 
     //POPCORNTIME METHODS
-    ping:               function() { lib.APIcall("ping"); },
+    ping:               function(callback) { lib.APIcall("ping", false, callback); },
     enter:              function() { lib.APIcall("enter"); },
     back:               function() { lib.APIcall("back"); },
     getviewstack:       function(callback) { lib.APIcall("getviewstack", false, callback); },
