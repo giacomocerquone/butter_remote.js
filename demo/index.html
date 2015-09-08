@@ -1,31 +1,61 @@
 <html>
 <head>
 	<title>Popcorntime Remote Control</title>
+
+	<link rel="stylesheet" href="style.css" />
+	<!-- Including Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<!-- Including jQuery -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="https://raw.githubusercontent.com/giacomocerquone/popcorntime_remote.js/master/dist/popcorntime_remote.min.js"></script>
+	<!-- Including the library -->
+	<!--<script src="https://raw.githubusercontent.com/giacomocerquone/popcorntime_remote.js/master/dist/popcorntime_remote.js"></script>-->
+	<script src="../dist/popcorntime_remote.js"></script>
 	<script src="script.js"></script>
-	<link href="style.css" rel="stylesheet" />
+
 </head>
 <body>
-	
 	<main>
+		<div id="header">
+			<h1>Welcome to Popcorntime Remote Control</h1>
+		</div>
 
 		<section id="login">
-			<h1>Welcome to Popcorntime remote control</h1>
 			<h2>Before you can start to use this application to control remotely your popcorntime, you must chek these settings:</h2>
 			<form id="options">
-				<input type="text" id="ip-address" placeholder="ip address - default: localhost" />
-				<input type="text" id="port" placeholder="port - default: 8080" />
-				<input type="text" id="username" placeholder="username - default: popcorn" />
-				<label for="password">password</label>
+
+				<label for="ip-address">IP ADDRESS</label>
+				<input type="text" id="ip-address" placeholder="localhost" />
+
+				<label for="port">PORT</label>
+				<input type="text" id="port" placeholder="8080" />
+
+				<label for="username">USERNAME</label>
+				<input type="text" id="username" placeholder="popcorn" />
+
+				<label for="password">PASSWORD</label>
 				<input type="password" id="password" placeholder="popcorn" />
+
+				<a href="javascript:void(0);" id="submit">connect</a>
 			</form>
 		</section>
 
 		<section id="controller">
+			<div id="toolbar">
+				<i class="fa fa-clone"></i>
+				<i class="fa fa-heart"></i>
+				<i class="fa fa-search"></i>
+			</div>
+
+			<div id="arrows">
+				<i class="fa fa-chevron-up"></i>
+				<i class="fa fa-chevron-down"></i>
+				<i class="fa fa-chevron-left"></i>
+				<i class="fa fa-chevron-right"></i>
+				<span class="center"></span>
+			</div>
+
 		</section>
 
 	</main>
-
 </body>
 </html>

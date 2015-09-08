@@ -3,37 +3,127 @@ body {
 	background:#f9f9f9;
 	color:#62706c;
 	text-align: center;
+	margin:0;
+	padding:0;
 }
 main {
 	display:block;
 }
 h1 {
-	font-size:1.25em;
+	font-size:1.7em;
 	font-weight: 200;
 }
 h2 {
 	font-size:1em;
 	font-weight: 200;
 }
+a {
+	text-decoration: none;
+}
+#header {
+	background: #375267;
+	padding:.5em;
+	margin:0;
+	box-shadow: 2px 2px 2px #ccc;
+	color: #f9f9f9;
+}
 
 /* LOGIN BOX */
 #login {
-	width:38.75em;
-	height:20em;
-	position:absolute;
-	top:50%;
-	left:50%;
-	margin-left:-19em;
-	margin-top:-10em;
+	width:25em;
+	margin:0 auto;
+	margin-top:5em;
 }
 #options > label {
 	text-transform: uppercase;
+	display:block;
+	text-align: left;
+	margin-bottom:.3em;
+	font-size: .8em;
+	color:#2D3C38;
 }
 #options > input {
 	outline:0;
-	border:2px solid #485753;
-	background:#f7f7f7;
-	padding:1em;
-	font-size:14px;
+	border:none;
+	background:#f1f1f1;
+	padding:1.5em 2em;
+	font-size:1em;
 	font-weight: 200;
+	margin-bottom:1em;
+	width:100%;
+	display: block;
+	color:#62706c;
+	box-shadow: 1px 1px 1px #ccc;
+}
+#submit {
+	padding:1.5em 2.5em;
+	color:#2D3C38;
+	display: inline-block;
+	margin-top: 1em;
+	text-transform: uppercase;
+	font-size: .8em;
+	border:1px solid #C8C8C8;
+	border-radius: 10px;
+	transition:.4s background;
+	background: transparent;
+	box-shadow: 1px 1px 1px #ccc;
+}
+#submit:hover {
+	background:#f1f1f1;
+}
+
+/* CONTROLLER BOX */
+#controller {
+	width:25em;
+	margin:0 auto;
+	margin-top:5em;
+	color:#375267;
+}
+#toolbar {
+	font-size: 2rem;
+	display: block;
+	margin-bottom: 2em;
+}
+#toolbar i {
+	margin:0 1em;
+}
+#arrows {
+	border-radius:100%;
+	width:25rem;
+	height:25rem;
+	border:2px solid #375267; 
+	position: relative;
+}
+#arrows i {
+	font-size: 5em;
+}
+.fa-chevron-left {
+	position:absolute;
+	top:10rem;
+	left:1.5rem;
+}
+.fa-chevron-right {
+	position:absolute;
+	top:10rem;
+	right:1.5rem;
+}
+.fa-chevron-down {
+	position:absolute;
+	top:18.5rem;
+	left:10rem;
+}
+.fa-chevron-up {
+	position:absolute;
+	top:1.5rem;
+	left:10rem;
+}
+.center {
+	display: inline-block;
+	width:5rem;
+	height:5rem;
+	border-radius: 100%;
+	background:#375267;
+	position: absolute;
+	top:10rem;
+	left:10rem;
 }
