@@ -1,6 +1,6 @@
 # popcorntime_remote.js
 popcorntime_remote.js is a javascript library that provides an easy way to make an application or whatever you want to control the interface of [popcorn time](https://popcorntime.io/) through the json rpc protocol.<br>
-The plugin is developed with simplicity in mind so the methods name are the same that you can find in the [popcorn time documention](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md) and there are many other conveniences.
+The plugin is developed with simplicity in mind so the methods name are the same that you can find in the [popcorn time documention](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md) and there are many other conveniences. So despite that doc has been written with the json rpc protocol in mind, the information about the usage of the methods are compatible for this library too... actually you will not even notice that you're using this library.
 
 ##Download
 You can get the plugin in different ways:
@@ -27,12 +27,6 @@ popcorntime_remote.init(
   }
 //If you don't need to change these settings you can remove this whole part
 );
-```
-From now on you'll call every method like this:
-```javascript
-popcorntime_remote.nameofthemethod(...);
-```
-Pretty simple uh?
 
 ##Usage
 As you can understand from the popcorn time documentation, there are "three kinds" of methods.
@@ -59,7 +53,7 @@ popcorntime_remote.volume([2]);
 ```
 
 ##The listennotification function
-I'd like to spend two words for this particular function. Popcorntime developers put this fundamental function in their API to know when something change on the desktop application. To listen for these important events you need to use "setInterval" so you can call the function at certain interval of times, here the example used also in the demo:
+I'd like to spend two words for this particular function. Popcorntime developers put this fundamental function in their API to know when something change on the desktop application. To listen these important events you need to use "setInterval" so you can call the function at specified intervals, here the example used also in the demo:
 ```javascript
 setInterval(function() {
     pr.listennotifications(function(data) {
@@ -71,9 +65,6 @@ setInterval(function() {
 
 ##The Demo
 Actually the demo that you can find inside this project is the coolest thing in here. It's just a draft to prove the potential of this library and what you can do with it. I decided also to use it as website for the people who want just to use it as remote controller. I'll do my best to improve it but I haven't so much free time so if you want to contribute I would really appreciate that!
-
-##Conclusion
-If you don't know if parameters are needed or what you have to pass to the methods and for every other information, as I already said, you can look at the [popcorn time documentation](https://git.popcorntime.io/popcorntime/desktop/blob/master/docs/json-rpc-api.md). Despite that doc has been written with the json rpc protocol in mind, the information about the usage of the methods are compatible for this library too... actually you will not even notice that you're using this library.
 
 ##License
 Released under the GNU 3 license.<br>
