@@ -1,7 +1,8 @@
 body {
-	font-family: Arial 16px/21 sans-serif;
-	background:#f9f9f9;
-	color:#62706c;
+	font-family: Arial sans-serif;
+	font-size: 16px;
+	background:#17181b;
+	color:#bcbec0;
 	text-align: center;
 	margin:0;
 	padding:0;
@@ -19,13 +20,15 @@ h2 {
 }
 a {
 	text-decoration: none;
+	color:#bcbec0;
 }
-#header {
-	background: #375267;
-	padding:.5em;
+ul {
+	list-style: none;
 	margin:0;
-	box-shadow: 2px 2px 2px #ccc;
-	color: #f9f9f9;
+	padding:0;
+}
+li {
+	float:left;
 }
 
 /* LOGIN BOX */
@@ -33,6 +36,7 @@ a {
 	width:25em;
 	margin:0 auto;
 	margin-top:5em;
+	color:#fff;
 }
 #options > label {
 	text-transform: uppercase;
@@ -40,7 +44,6 @@ a {
 	text-align: left;
 	margin-bottom:.3em;
 	font-size: .8em;
-	color:#2D3C38;
 }
 #options > input {
 	outline:0;
@@ -52,25 +55,83 @@ a {
 	margin-bottom:1em;
 	width:100%;
 	display: block;
-	color:#62706c;
+	color:#bcbec0;
 	box-shadow: 1px 1px 1px #ccc;
 }
 #submit {
 	padding:1.5em 2.5em;
-	color:#2D3C38;
+	color:#62706c;
 	display: inline-block;
 	margin-top: 1em;
 	text-transform: uppercase;
 	font-size: .8em;
 	border:1px solid #C8C8C8;
 	border-radius: 10px;
-	transition:.4s background;
-	background: transparent;
-	box-shadow: 1px 1px 1px #ccc;
-}
-#submit:hover {
 	background:#f1f1f1;
 }
+
+
+
+
+
+/* HEADER */
+#header {
+	display: none;
+	background: #16171a;
+	padding:1em 0 0 0;
+	margin:0;
+	color: #c3c5c7;
+	box-shadow: 0px 6px 8px -4px rgba(0,0,0,0.9);
+}
+#header > #left {
+	float:left;
+}
+#header > #left > a {
+	font-weight: 700;
+	display: inline-block;
+	padding:0 1em;
+	padding-bottom:.5em;
+	font-size: .875em;
+}
+#header > #left > a.active {
+	border-bottom: 4px solid #2b6ed2;
+} 
+
+
+
+
+
+/* MOVIES LIST */
+#movies {
+
+}
+
+#movies > ul > li {
+	margin:10px;
+	width:134px;
+}
+#movies > ul > li > a > img {
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px #000;
+}
+#movies > ul > li > a > p {
+	height: auto;
+	margin: 6px 0 4px;
+	color: #fff;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-bottom: 2px;
+	text-align: left;
+	font-size: .8em;
+	font-weight: bold;
+}
+
+
+
+
+
 
 /* CONTROLLER BOX */
 #controller {
@@ -78,15 +139,18 @@ a {
 	margin:0 auto;
 	margin-top:5em;
 	color:#375267;
+	display: none;
 }
+
 #toolbar {
 	font-size: 2rem;
 	display: block;
 	margin-bottom: 2em;
 }
 #toolbar i {
-	margin:0 1em;
+	margin:0 .5em;
 }
+
 #arrows {
 	border-radius:100%;
 	width:25rem;
