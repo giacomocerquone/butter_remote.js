@@ -4,8 +4,16 @@ $(document).ready( function() {
         connected = false;
 
     function getlist(tab) {
+        //Delete the actual active tab
+        $("#tabs a").removeClass("active");
+        //Empty the item's list
         $("#list > ul").empty();
+        //Set active the chosen tab
+        $("#tabs > #"+tab).addClass("active");
         if(tab == "movies") {
+            setInterval(function() {
+                pr.movieslist();
+            }, 500);
             pr.getcurrentlist(function(data) {
                 console.log(data);
                 $.each(data.result.list, function(index, item) {
@@ -14,6 +22,9 @@ $(document).ready( function() {
                 });
             });
         } else if(tab == "shows") {
+            setInterval(function() {
+                pr.showslis();
+            }, 500);
             pr.getcurrentlist(function(data) {
                 $.each(data.result.list, function(index, item) {
                     var html = '<li><a class="'+index+' open-item"><img src="'+this.images['poster']+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
@@ -54,7 +65,14 @@ $(document).ready( function() {
                 } else if(view == "movie-detail") {
                 }
 
-                //pr.getcurrenttab();
+                tabs = [];
+                pr.getcurrenttab(function(data) {
+                    tabs.push(data.result.tab);
+                });
+                //Check if the user changed tab on the desktop app
+                if(tabs.length == 2 && tabs[tabs.length-1] != tabs[length-2]) {
+                    $('#'+tabs).trigger("click");
+                }
 
             })
         }, 1000);
@@ -63,10 +81,7 @@ $(document).ready( function() {
         //Tabs handling
         //Get the current tab
         pr.getcurrenttab(function(data) {
-            $("#tabs a").removeClass("active");
-            //Set the actual tab active through the id
-            $('#'+data.result.tab).addClass("active");
-            //Call the function and pass the current tab to retrieve the right items list
+            //Call the function and pass the current tab to retrieve the right current items list
             getlist(data.result.tab);
         });
     });
@@ -80,29 +95,15 @@ $(document).ready( function() {
     });
 
     $("#movies").click(function() {
-        $("#tabs a").removeClass("active");
-        pr.movieslist();
-        $("#tabs > #movies").addClass("active");
         getlist("movies");
     });
     $("#shows").click(function() {
-        $("#tabs a").removeClass("active");
-        pr.showslist();
-        $("#tabs > #shows").addClass("active");
         getlist("shows");
     });
     $("#anime").click(function() {
-        $("#tabs a").removeClass("active");
-        pr.animelist();
-        $("#tabs > #anime").addClass("active");
-        getlist();
+        
     });
 
 
 
 });
-
-
-
-
-
