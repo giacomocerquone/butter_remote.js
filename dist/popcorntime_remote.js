@@ -47,7 +47,6 @@ popcorntime_remote = {
                 if(callback) callback(data);
             } else {
  
-
                 lib.log("Connection time out: can't reach popcorn time. Try changing the settings.");
                 lib.isConnected = "false";
             }
