@@ -106,10 +106,11 @@ li {
 
 
 /* MOVIES LIST */
-#list {
-
+#list > ul{
+	display: flex;
+	flex-wrap:wrap;
+	justify-content:space-between;
 }
-
 #list > ul > li {
 	margin:10px;
 	width:134px;
