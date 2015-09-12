@@ -1,7 +1,7 @@
 $(document).ready( function() {
 
     var pr = popcorntime_remote,
-        connected = false;
+        tabs = [];;
 
     function getlist(tab) {
         //Delete the actual active tab
@@ -11,28 +11,26 @@ $(document).ready( function() {
         //Set active the chosen tab
         $("#tabs > #"+tab).addClass("active");
         if(tab == "movies") {
-            setInterval(function() {
-                pr.movieslist();
-            }, 500);
             pr.getcurrentlist(function(data) {
-                console.log(data);
                 $.each(data.result.list, function(index, item) {
-                    var html = '<li><a class="'+index+' open-item"><img src="'+this.cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
+                    var html = '<li><a class="'+index+'" id="open-item"><img src="'+this.cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
                     $("#list > ul").append(html);
                 });
             });
         } else if(tab == "shows") {
-            setInterval(function() {
-                pr.showslis();
-            }, 500);
             pr.getcurrentlist(function(data) {
                 $.each(data.result.list, function(index, item) {
-                    var html = '<li><a class="'+index+' open-item"><img src="'+this.images['poster']+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
+                    var html = '<li><a class="'+index+'" id="open-item"><img src="'+this.images['poster']+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
                     $("#list > ul").append(html);
                 });
             });
         } else if(tab == "anime") {
-
+            pr.getcurrentlist(function(data) {
+                $.each(data.result.list, function(index, item) {
+                    var html = '<li><a class="'+index+'" id="open-item"><img src="'+this.images['poster']+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
+                    $("#list > ul").append(html);
+                });
+            });
         }
     }
 
@@ -64,17 +62,17 @@ $(document).ready( function() {
                    
                 } else if(view == "movie-detail") {
                 }
-
-                tabs = [];
-                pr.getcurrenttab(function(data) {
-                    tabs.push(data.result.tab);
-                });
-                //Check if the user changed tab on the desktop app
-                if(tabs.length == 2 && tabs[tabs.length-1] != tabs[length-2]) {
-                    $('#'+tabs).trigger("click");
-                }
-
-            })
+            });
+            
+            pr.getcurrenttab(function(data) {
+                tabs.push(data.result.tab);
+            });
+            //Check if the user changed tab on the desktop app
+            if(tabs.length >= 2 && tabs[tabs.length-1] != tabs[tabs.length-2]) {
+                setTimeout(function() {
+                    getlist(tabs[tabs.length-1]);
+                }, 500);
+            }
         }, 1000);
 
 
@@ -87,21 +85,34 @@ $(document).ready( function() {
     });
 
 
-
-    $(document).on("click", ".open-item", function() {
+    //Listen for a click on a item
+    $(document).on("click", "#open-item", function() {
+        //Retrieve the index of the item stored in its class
         var toSelect = $(this).attr('class');
-        pr.setselection(toSelect);
+        pr.setselection([toSelect]);
         pr.enter();
     });
 
+    //Movies tab pressed
     $("#movies").click(function() {
-        getlist("movies");
+        //Switch to the tab
+        pr.movieslist();
+        //Wait 500ms to get the items list so popcorn time has time to load them 
+        setTimeout(function() {
+            getlist("movies");
+        }, 1000);
     });
     $("#shows").click(function() {
-        getlist("shows");
+        pr.showslist();
+        setTimeout(function() {
+            getlist("shows");
+        }, 1000);   
     });
     $("#anime").click(function() {
-        
+        pr.animelist();
+        setTimeout(function() {
+            getlist("anime");
+        }, 1000);   
     });
 
 
