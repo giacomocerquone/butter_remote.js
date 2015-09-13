@@ -1,4 +1,5 @@
-# popremote.giacomocerquone.com
+# Popcorn Time Remote Controller
+http://popremote.giacomocerquone.com
 This is the website which uses the library.
 Of course both of them are developed by me.
 
