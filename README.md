@@ -1,7 +1,7 @@
 # Popcorn Time Remote Controller
-http://popremote.giacomocerquone.com
-This is the website which uses the library.
-Of course both of them are developed by me.
+http://popremote.giacomocerquone.com<br>
+This is the website which uses the library.<br>
+Of course both of them are developed by me.<br>
 
 #License
 Released under the GNU 3 license.<br>
