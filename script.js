@@ -10,6 +10,7 @@ $(document).ready( function() {
         $("#list > ul").empty();
         //Set active the chosen tab
         $("#tabs > #"+tab).addClass("active");
+        //Given the differences between the movies and the shows/anime object, they have to be filtered differently
         if(tab == "movies") {
             pr.getcurrentlist(function(data) {
                 $.each(data.result.list, function(index, item) {
@@ -27,7 +28,8 @@ $(document).ready( function() {
         }
     }
 
-    $("#submit").click(function() {
+    $("#submit").click(function(e) {
+        e.preventDefault();
 
         var ipVal = ( !$("#ip-address").val() ? "localhost" : $("#ip-address").val() );
         var portVal = ( !$("#port").val() ? "8008" : $("#port").val() );
@@ -38,25 +40,27 @@ $(document).ready( function() {
             if(data.result) {
                 $("#login").hide();
                 $("#header").show();
-                $("#controller").show();
             } else {
                 alert("Couldn't connect. Check for username and password.");
             }
         });
 
         setInterval(function() {
+            //Listen for changes on the viewstack
             pr.listennotifications(function(data) {
-
                 if(data.result.events.viewstack) {
                     view = data.result.events.viewstack[data.result.events.viewstack.length-1];
-                }
-
-                if(view == "main-browser") {
+                    console.log(view);
+                    if(view == "main-browser") {
                    
-                } else if(view == "movie-detail") {
+                    } else if(view == "movie-detail") {
+                        $("#list > ul").empty();
+                    }
                 }
+                
             });
-            
+
+            //Collect the current tab every second
             pr.getcurrenttab(function(data) {
                 tabs.push(data.result.tab);
             });
@@ -78,7 +82,7 @@ $(document).ready( function() {
     });
 
 
-    //Listen for a click on a item
+    //Listen for a click on an item
     $(document).on("click", "#open-item", function() {
         //Retrieve the index of the item stored in its class
         var toSelect = $(this).attr('class');
@@ -86,29 +90,15 @@ $(document).ready( function() {
         pr.enter();
     });
 
-    //UNIFICARE LE TRE FUNZIONI CLICK IN UNA SOLA CON LA VARIABILE
-    //E COME SELETTORE USARE UN SEMPLICE E GENERALE #tabs > a
-
-    //Movies tab pressed
-    $("#movies").click(function() {
-        //Switch to the tab
-        pr.movieslist();
+    //Listen for a click on tab 
+    $("#tabs > a").click(function() {
+        id = $(this).attr("id");
+        //Switch to the clicked tab
+        if(id == "movies") { pr.movieslist(); } else if(id == "shows") { pr.showslist(); } else if(id == "anime") { pr.animelist(); }
         //Wait 500ms to get the items list so popcorn time has time to load them 
         setTimeout(function() {
-            getlist("movies");
+            getlist(id);
         }, 1000);
-    });
-    $("#shows").click(function() {
-        pr.showslist();
-        setTimeout(function() {
-            getlist("shows");
-        }, 1000);   
-    });
-    $("#anime").click(function() {
-        pr.animelist();
-        setTimeout(function() {
-            getlist("anime");
-        }, 1000);   
     });
 
 
