@@ -17,14 +17,7 @@ $(document).ready( function() {
                     $("#list > ul").append(html);
                 });
             });
-        } else if(tab == "shows") {
-            pr.getcurrentlist(function(data) {
-                $.each(data.result.list, function(index, item) {
-                    var html = '<li><a class="'+index+'" id="open-item"><img src="'+this.images['poster']+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
-                    $("#list > ul").append(html);
-                });
-            });
-        } else if(tab == "anime") {
+        } else if(tab == "shows" || tab == "anime") {
             pr.getcurrentlist(function(data) {
                 $.each(data.result.list, function(index, item) {
                     var html = '<li><a class="'+index+'" id="open-item"><img src="'+this.images['poster']+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
@@ -92,6 +85,9 @@ $(document).ready( function() {
         pr.setselection([toSelect]);
         pr.enter();
     });
+
+    //UNIFICARE LE TRE FUNZIONI CLICK IN UNA SOLA CON LA VARIABILE
+    //E COME SELETTORE USARE UN SEMPLICE E GENERALE #tabs > a
 
     //Movies tab pressed
     $("#movies").click(function() {
