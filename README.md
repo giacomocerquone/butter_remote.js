@@ -6,11 +6,11 @@ The plugin is developed with simplicity in mind so the methods name are the same
 You can get the plugin in different ways:
 
 1. Downloading the raw file in the dist folder choosing the [clean](https://raw.githubusercontent.com/giacomocerquone/popcorntime_remote.js/master/dist/popcorntime_remote.js) or [minified](https://raw.githubusercontent.com/giacomocerquone/popcorntime_remote.js/master/dist/popcorntime_remote.min.js) version.
-2. If you want to take a look at the demo, you can directly [download the repo](https://github.com/giacomocerquone/popcorntime_remote.js/archive/gh-pages.zip).
+2. If you want to take a look at the demo, you can directly [download the repo](https://github.com/giacomocerquone/popcorntime_remote.js/archive/gh-pages.zip) or [watch it](https://github.com/giacomocerquone/popcorntime_remote.js/tree/gh-pages).
 3. Go to the releases tab and download the [Source code.zip]()
 
-##The Demo
-Actually the demo that you can find on the gh-pages branch is the coolest thing in here. It's just a draft to prove the potential of this library and what you can do with it. I decided also to use it as website for the people who want just to use it as remote controller. I'll do my best to improve it but I haven't so much free time so if you want to contribute I would really appreciate that!
+##[The Demo](https://popremote.giacomocerquone.com)
+Actually the demo that you can find on the [gh-pages branch](https://github.com/giacomocerquone/popcorntime_remote.js/tree/gh-pages) is the coolest thing in here. It's just a draft to prove the potential of this library and what you can do with it. I decided also to use it as website for the people who want just to use it as remote controller. I'll do my best to improve it but I haven't so much free time so if you want to contribute I would really appreciate that!
 
 ##Include and Initialize
 Firstly you should obviously include the library on the page you want to use it:
