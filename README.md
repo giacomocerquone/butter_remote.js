@@ -56,7 +56,7 @@ popcorntime_remote.volume(function(data) {
 popcorntime_remote.volume([2]);
 ```
 
-####The listennotification function
+##### The listennotification function
 I'd like to spend two words for this particular function. Popcorntime developers put this fundamental function in their API to know when something change on the desktop application. To listen these important events you need to use "setInterval" so you can call the function at specified intervals, here the example used also in the demo:
 ```javascript
 setInterval(function() {
