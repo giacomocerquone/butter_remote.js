@@ -64,8 +64,13 @@ $(document).ready( function() {
             pr.getcurrenttab(function(data) {
                 tabs.push(data.result.tab);
             });
+            //Delete the oldest tab to not collect too much items in array
+            if(tabs.length == 3) {
+                tabs.splice(0, 1);
+            }
+            console.log(tabs);
             //Check if the user changed tab on the desktop app
-            if(tabs.length >= 2 && tabs[tabs.length-1] != tabs[tabs.length-2]) {
+            if(tabs.length == 2 && tabs[tabs.length-1] != tabs[tabs.length-2]) {
                 setTimeout(function() {
                     getlist(tabs[tabs.length-1]);
                 }, 500);
@@ -90,7 +95,7 @@ $(document).ready( function() {
         pr.enter();
     });
 
-    //Listen for a click on tab 
+    //Listen for a click on a tab 
     $("#tabs > a").click(function() {
         id = $(this).attr("id");
         //Switch to the clicked tab
