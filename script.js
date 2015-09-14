@@ -1,7 +1,7 @@
 $(document).ready( function() {
 
     var pr = popcorntime_remote,
-        tabs = [];;
+        tabs = [];
 
     function getlist(tab) {
         //Delete the actual active tab
