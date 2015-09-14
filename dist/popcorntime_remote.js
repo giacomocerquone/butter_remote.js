@@ -1,7 +1,7 @@
 /*
     Author:     Giacomo Cerquone
     Email:      cerquone96@hotmail.it
-    Website:    http://www.giacomocerquone.it
+    Website:    http://www.giacomocerquone.com
 
     This library is released under the GPL 3 license.
 */
