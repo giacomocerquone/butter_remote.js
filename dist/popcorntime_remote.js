@@ -5,10 +5,9 @@
 
     This library is released under the GPL 3 license.
 */
-var lib,
-popcorntime_remote = {
-
+var popcorntime_remote = {
     //LIB PROPERTIES
+    lib: this,
     isConnected: true,
     opt: {
         username: "popcorn", 
