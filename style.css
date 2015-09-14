@@ -1,5 +1,5 @@
 body {
-	font-family: Arial sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	background:#17181b;
 	color:#bcbec0;
@@ -86,11 +86,11 @@ li {
 	background: #16171a;
 	padding:1em 0 0 0;
 	margin:0;
-	color: #c3c5c7;
 	box-shadow: 0px 6px 8px -4px rgba(0,0,0,0.9);
 }
 #header > #tabs {
 	float:left;
+	color: #c3c5c7;
 }
 #tabs > a {
 	font-weight: 700;
@@ -107,7 +107,26 @@ li {
 	color:#fff;
 }
 
-
+#header > #right {
+	float:right;
+	color:#909498;
+	margin-right:1em;
+}
+#right > i {
+	display: inline-block;
+	margin:0 1px;
+	font-size: 1.2em;
+	cursor:pointer;
+}
+#right > i.active {
+	color:#2264c5;
+}
+#right > #Favorites.active {
+	color:#d82b35 !important;
+}
+#right > i:hover {
+	color:#2264c5;
+}
 
 
 
