@@ -20,28 +20,16 @@ $(document).ready( function() {
         //Set active the chosen tab
         $("#tabs > #"+tab+", #right > #"+tab).addClass("active");
         //Given the differences between the movies and the shows/anime object, they have to be filtered differently
-        if(tab == "movies") {
-            pr.getcurrentlist(function(data) {
-                $.each(data.result.list, function(index, item) {
-                    var html = '<li><a class="'+index+'" id="open-item"><img src="'+this.cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
-                    $("#list > ul").append(html);
-                });
+        pr.getcurrentlist(function(data) {
+            //while(!data) { }
+            console.log(data);
+            $.each(data.result.list, function(index, item) {
+                if(this.type=="movie" || this.type=="bookmarkedmovie") { cover=this.cover; } else if(this.type=="show" || this.type=="bookmarkedshow") { cover=this.images.poster; }
+                var html = '<li><a class="'+index+'" id="open-item"><img src="'+cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
+                $("#list > ul").append(html);
             });
-        } else if(tab == "shows" || tab == "anime" || tab == "Watchlist") {
-            pr.getcurrentlist(function(data) {
-                $.each(data.result.list, function(index, item) {
-                    var html = '<li><a class="'+index+'" id="open-item"><img src="'+this.images['poster']+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
-                    $("#list > ul").append(html);
-                });
-            });
-        } else if( tab == "Favorites" ) {
-            pr.getcurrentlist(function(data) {
-                $.each(data.result.list, function(index, item) {
-                    var html = '<li><a class="'+index+'" id="open-item"><img src="'+this.cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
-                    $("#list > ul").append(html);
-                });
-            });
-        }
+        });
+
     }
 
     $("#submit").click(function(e) {
@@ -66,7 +54,6 @@ $(document).ready( function() {
             pr.listennotifications(function(data) {
                 if(data.result.events.viewstack) {
                     view = data.result.events.viewstack[data.result.events.viewstack.length-1];
-                    console.log(view);
                     if(view == "main-browser") {
                         pr.getcurrenttab(function(data) {
                             //Call the function and pass the current tab
@@ -101,12 +88,10 @@ $(document).ready( function() {
 
         //Get the first viewstack
         pr.getviewstack(function(data) {
-            console.log(data);
             view = data.result.viewstack[data.result.viewstack.length-1];
             if(view == "main-browser") {
                 //Get the current tab
                 pr.getcurrenttab(function(data) {
-                    console.log(data);
                     //Call the function and pass the current tab
                     getlist(data.result.tab);
                 });
