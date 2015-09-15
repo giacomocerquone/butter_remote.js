@@ -21,7 +21,7 @@ $(document).ready( function() {
         $("#tabs > #"+tab+", #right > #"+tab).addClass("active");
         //Given the differences between the movies and the shows/anime object, they have to be filtered differently
         pr.getcurrentlist(function(data) {
-            //while(!data) { }
+            while(!data) { }
             console.log(data);
             $.each(data.result.list, function(index, item) {
                 if(this.type=="movie" || this.type=="bookmarkedmovie") { cover=this.cover; } else if(this.type=="show" || this.type=="bookmarkedshow") { cover=this.images.poster; }
@@ -49,8 +49,25 @@ $(document).ready( function() {
             }
         });
 
+        //Get the first viewstack
+        pr.getviewstack(function(data) {
+            view = data.result.viewstack[data.result.viewstack.length-1];
+            if(view == "main-browser") {
+                pr.getcurrenttab(function(data) {
+                    //Pass the current tab to the function
+                    getlist(data.result.tab);
+                });
+            } else if(view == "") {
+
+            } else if(view == "") {
+
+            }
+            
+        });
+
+        //Lets repeat operations every second
         setInterval(function() {
-            //Listen for changes of the viewstack
+            //Listen for notifications
             pr.listennotifications(function(data) {
                 if(data.result.events.viewstack) {
                     view = data.result.events.viewstack[data.result.events.viewstack.length-1];
@@ -66,15 +83,14 @@ $(document).ready( function() {
                 
             });
 
-            //Listen for changes of the active tab
+            //Listen for changes of the active tab (made from the website or the desktop app)
             pr.getcurrenttab(function(data) {
                 //Collect the current tab every second
                 tabs.push(data.result.tab);
-                //Delete the oldest tab to not collect too much items in array
+                //Delete the oldest tab
                 if(tabs.length == 3) {
                     tabs.splice(0, 1);
                 }
-                //Check if the user changed tab on the desktop app
                 if(tabs.length == 2 && tabs[tabs.length-1] != tabs[tabs.length-2]) {
                     //Wait 500ms to get the items list so popcorn time has time to load them 
                     setTimeout(function() {
@@ -85,24 +101,6 @@ $(document).ready( function() {
             
 
         }, 1000);
-
-        //Get the first viewstack
-        pr.getviewstack(function(data) {
-            view = data.result.viewstack[data.result.viewstack.length-1];
-            if(view == "main-browser") {
-                //Get the current tab
-                pr.getcurrenttab(function(data) {
-                    //Call the function and pass the current tab
-                    getlist(data.result.tab);
-                });
-            } else if(view == "settings-container-contain") {
-
-            } else if(view == "") {
-
-            }
-            
-        });
-        
     });
 
 
