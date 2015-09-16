@@ -19,7 +19,7 @@ $(document).ready( function() {
         //Set active the chosen tab
         $("#tabs > #"+tab+", #right > #"+tab).addClass("active");
         //Repeats the function until popcorntime loaded the items so that can respond correctly
-        var interval = setInterval(function() {
+        while(1=1) {
 
             pr.getcurrentlist(function(data) {
                 console.log(data);
@@ -30,11 +30,11 @@ $(document).ready( function() {
                         var html = '<li><a class="'+index+'" id="open-item"><img src="'+cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
                         $("#list > ul").append(html);
                     });
-                    clearInterval(interval);
+                    break;
                 } 
             });
 
-        }, 1000);
+        }
 
     }
 
