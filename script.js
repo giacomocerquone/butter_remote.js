@@ -9,8 +9,7 @@
 */
 $(document).ready( function() {
 
-    var pr = popcorntime_remote,
-        tabs = [];
+    var pr = popcorntime_remote;
 
     function getlist(tab) {
         //Delete the actual active tab
@@ -19,16 +18,23 @@ $(document).ready( function() {
         $("#list > ul").empty();
         //Set active the chosen tab
         $("#tabs > #"+tab+", #right > #"+tab).addClass("active");
-        //Given the differences between the movies and the shows/anime object, they have to be filtered differently
-        pr.getcurrentlist(function(data) {
-            while(!data) { }
-            console.log(data);
-            $.each(data.result.list, function(index, item) {
-                if(this.type=="movie" || this.type=="bookmarkedmovie") { cover=this.cover; } else if(this.type=="show" || this.type=="bookmarkedshow") { cover=this.images.poster; }
-                var html = '<li><a class="'+index+'" id="open-item"><img src="'+cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
-                $("#list > ul").append(html);
+        //Repeats the function until popcorntime loaded the items so that can respond correctly
+        var interval = setInterval(function() {
+
+            pr.getcurrentlist(function(data) {
+                console.log(data);
+                if(data.result.list) {
+                    $.each(data.result.list, function(index, item) {
+                        //Given the differences between the movies and the shows/anime object, they have to be filtered differently
+                        if(this.type=="movie" || this.type=="bookmarkedmovie") { cover=this.image; } else if(this.type=="show" || this.type=="bookmarkedshow") { cover=this.images.poster; }
+                        var html = '<li><a class="'+index+'" id="open-item"><img src="'+cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
+                        $("#list > ul").append(html);
+                    });
+                    clearInterval(interval);
+                } 
             });
-        });
+
+        }, 1000);
 
     }
 
@@ -73,7 +79,6 @@ $(document).ready( function() {
                     view = data.result.events.viewstack[data.result.events.viewstack.length-1];
                     if(view == "main-browser") {
                         pr.getcurrenttab(function(data) {
-                            //Call the function and pass the current tab
                             getlist(data.result.tab);
                         });
                     } else if(view == "movie-detail") {
@@ -83,24 +88,7 @@ $(document).ready( function() {
                 
             });
 
-            //Listen for changes of the active tab (made from the website or the desktop app)
-            pr.getcurrenttab(function(data) {
-                //Collect the current tab every second
-                tabs.push(data.result.tab);
-                //Delete the oldest tab
-                if(tabs.length == 3) {
-                    tabs.splice(0, 1);
-                }
-                if(tabs.length == 2 && tabs[tabs.length-1] != tabs[tabs.length-2]) {
-                    //Wait 500ms to get the items list so popcorn time has time to load them 
-                    setTimeout(function() {
-                        getlist(tabs[tabs.length-1]);
-                    }, 500);
-                }
-            });
-            
-
-        }, 1000);
+        }, 2000);
     });
 
 
