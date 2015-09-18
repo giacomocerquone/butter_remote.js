@@ -11,31 +11,42 @@ $(document).ready( function() {
 
     var pr = popcorntime_remote;
 
-    function getlist(tab) {
-        //Delete the actual active tab
-        $("#tabs a, #right i").removeClass("active");
+    function getList() {
+        pr.getcurrenttab(function(data) { 
+            tab = data.result.tab;
+            //Delete the actual active tab
+            $("#tabs a, #right i").removeClass("active");
+            //Set active the chosen tab
+            $("#tabs > #"+tab+", #right > #"+tab).addClass("active");
+            //Repeats the function until popcorntime loaded the items so that can respond correctly
+            var interval = setInterval(function() {
+                pr.getcurrentlist(function(data) {
+                    //if errors are not returned
+                    if(!data.error) {
+                        var htmlList = "";
+                        //Cycle the elements of the list
+                        $.each(data.result.list, function(index, item) {
+                            //Given the differences between the movies and the shows/anime object, they have to be filtered differently
+                            if(this.type=="movie" || this.type=="bookmarkedmovie") { cover=this.image; } else if(this.type=="show" || this.type=="bookmarkedshow") { cover=this.images.poster; }
+                            //Build 
+                            htmlList += '<li><a class="'+index+'" id="open-item"><img src="'+cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
+                        });
+                        $("#container").html("<section id='list'><ul>"+htmlList+"</ul></section>");
+                        clearInterval(interval);
+                    }
+                });
+            }, 100);
+        });
+    }
+
+    function itemDetails() {
         //Empty the item's list
-        $("#list > ul").empty();
-        //Set active the chosen tab
-        $("#tabs > #"+tab+", #right > #"+tab).addClass("active");
-        //Repeats the function until popcorntime loaded the items so that can respond correctly
-        while(1=1) {
-
-            pr.getcurrentlist(function(data) {
-                console.log(data);
-                if(data.result.list) {
-                    $.each(data.result.list, function(index, item) {
-                        //Given the differences between the movies and the shows/anime object, they have to be filtered differently
-                        if(this.type=="movie" || this.type=="bookmarkedmovie") { cover=this.image; } else if(this.type=="show" || this.type=="bookmarkedshow") { cover=this.images.poster; }
-                        var html = '<li><a class="'+index+'" id="open-item"><img src="'+cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
-                        $("#list > ul").append(html);
-                    });
-                    break;
-                } 
-            });
-
-        }
-
+        pr.getselection(function(data) {
+            if(data.result.type=="movie" || data.result.type=="bookmarkedmovie") { cover=data.result.image; } else if(data.result.type=="show" || data.result.type=="bookmarkedshow") { cover=data.result.images.poster; }
+            var htmlDetail = '<img src="'+cover+'" width="134" /><p>'+data.result.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+data.result.year+'</p>';
+            $("#container").html("<section id='itemdetail'><ul>"+htmlDetail+"</ul></section>");
+            console.log(data);
+        });
     }
 
     $("#submit").click(function(e) {
@@ -59,14 +70,9 @@ $(document).ready( function() {
         pr.getviewstack(function(data) {
             view = data.result.viewstack[data.result.viewstack.length-1];
             if(view == "main-browser") {
-                pr.getcurrenttab(function(data) {
-                    //Pass the current tab to the function
-                    getlist(data.result.tab);
-                });
-            } else if(view == "") {
-
-            } else if(view == "") {
-
+                getList();
+            } else if(view == "movie-detail" || view == "shows-container-contain") {
+                itemDetails();
             }
             
         });
@@ -78,17 +84,16 @@ $(document).ready( function() {
                 if(data.result.events.viewstack) {
                     view = data.result.events.viewstack[data.result.events.viewstack.length-1];
                     if(view == "main-browser") {
-                        pr.getcurrenttab(function(data) {
-                            getlist(data.result.tab);
-                        });
-                    } else if(view == "movie-detail") {
-                        $("#list > ul").empty();
+                        getList();
+                    } else if(view == "movie-detail" || view == "shows-container-contain") {
+                        itemDetails();
                     }
+
                 }
                 
             });
 
-        }, 2000);
+        }, 1000);
     });
 
 
