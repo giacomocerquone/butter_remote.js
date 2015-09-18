@@ -175,5 +175,4 @@ li {
 @media (max-width: 570px) {
   #login { width:90%; margin-top:0; font-size: 14px; }
   #list > ul > li { }
-  #header { font-size: 12px; }
 }
