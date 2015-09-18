@@ -1,4 +1,4 @@
-# Popcorn Time Remote Controller
+# Popcorn Time Remote Controller by Giacomo Cerquone
 http://popremote.giacomocerquone.com<br>
 This is the website which uses the library.<br>
 Of course both of them are developed by me.<br>
