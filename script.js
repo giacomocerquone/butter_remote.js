@@ -28,8 +28,8 @@ $(document).ready( function() {
                         $.each(data.result.list, function(index, item) {
                             //Given the differences between the movies and the shows/anime object, they have to be filtered differently
                             if(this.type=="movie" || this.type=="bookmarkedmovie") { cover=this.image; } else if(this.type=="show" || this.type=="bookmarkedshow") { cover=this.images.poster; }
-                            //Build 
-                            htmlList += '<li><a class="'+index+'" id="open-item"><img src="'+cover+'" width="134" /><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
+                            //Build the html
+                            htmlList += '<li><a class="'+index+'" id="open-item"><div style="width:134px; height:201px; background-color:#000;background-size:cover; background-image:url('+cover+');"></div><p>'+this.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+this.year+'</p></a></li>';
                         });
                         $("#container").html("<section id='list'><ul>"+htmlList+"</ul></section>");
                         clearInterval(interval);
@@ -119,6 +119,22 @@ $(document).ready( function() {
             pr.showfavourites(); 
         } else if(id == "Watchlist") { 
             pr.showwatchlist(); 
+        }
+    });
+
+    //Listen for a click on search
+    $('#search-button').click(function() {
+        $('.search-input').toggleClass('search-input-animated');
+        $('.search-input').focus();
+    });
+    $('.search-input').focusout(function() {
+        $('.search-input').removeClass('search-input-animated');
+    });
+    //Listen for enter when the search is focused
+    $(document).keypress(function(e) {
+        if(e.which == 13 && $(".search-input").is(":focus")) {
+            pr.filtersearch([$(".search-input").val()]);
+            getList();
         }
     });
 

@@ -171,6 +171,33 @@ li {
 
 
 
+#search-button {
+  cursor:pointer;
+  outline:0;
+}
+.search-input {
+  -webkit-appearance:none;
+  display:inline-block !important;
+  outline:0;
+  border:0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color:#556172;
+  width:0;
+  margin:0;
+  padding:0;
+  border-bottom:2px solid #999;
+  transition:.3s width, .3s margin, .3s padding;
+  background:#fefefe;
+}
+.search-input-animated {
+  width:15em;
+  margin:-1em 2em 0 0;
+  padding:1em;
+}
+
+
 
 @media (max-width: 570px) {
   #login { width:90%; margin-top:0; font-size: 14px; }
