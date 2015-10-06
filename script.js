@@ -33,7 +33,10 @@ $(document).ready( function() {
                         });
                         $("#container").html("<section id='list'><ul>"+htmlList+"</ul></section>");
                         clearInterval(interval);
+                    } else {
+                        $("#container").empty();
                     }
+
                 });
             }, 100);
         });
@@ -42,10 +45,28 @@ $(document).ready( function() {
     function itemDetails() {
         //Empty the item's list
         pr.getselection(function(data) {
-            if(data.result.type=="movie" || data.result.type=="bookmarkedmovie") { cover=data.result.image; } else if(data.result.type=="show" || data.result.type=="bookmarkedshow") { cover=data.result.images.poster; }
-            var htmlDetail = '<img src="'+cover+'" width="134" /><p>'+data.result.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+data.result.year+'</p>';
-            $("#container").html("<section id='itemdetail'><ul>"+htmlDetail+"</ul></section>");
-            console.log(data);
+            var cover, genres = '', playButtons = '';
+            if(data.result.type=="movie" || data.result.type=="bookmarkedmovie") { 
+                cover = data.result.cover;
+                playButtons = '<a id="watch-now">Watch Now</a> <a id="watch-trailer">Watch Trailer</a> <a id="toggle-quality"></a>';
+
+                data.result.genre.forEach(function(item, i) {
+                    trailingSlash = (i != data.result.genre.length-1 ? "/" : "");
+                    genres += item+trailingSlash;
+                });
+            } else if(data.result.type=="show" || data.result.type=="bookmarkedshow") {
+                cover = data.result.images.poster;
+                playButtons = '<a id="watch-now">Watch Now</a>';
+
+                data.result.genres.forEach(function(item, i) {
+                    trailingSlash = (i != data.result.genres.length-1 ? "/" : "");
+                    genres += item+trailingSlash;
+                });
+            }
+            console.log(data.result);
+            var htmlDetail = '<section id="item-detail"><div id="item-image"><img src="'+cover+'" width="500" /></div> <div id="item-descr"><p id="title">'+data.result.title+'</p><p style="color:#5b5b5b; font-size:0.75em;">'+data.result.year+' | '+data.result.runtime+'min. | '+genres+' | IMDB: '+data.result.rating+'</p><p>'+data.result.synopsis+'</p> '+playButtons+' <i id="toggle-favourite" class="fa fa-heart"></i> <i id="toggle-watched"class="fa fa-eye-slash"></i> </div><div style="clear:both;"></div></section>';
+            $("#container").html(htmlDetail);
+
         });
     }
 
@@ -97,7 +118,7 @@ $(document).ready( function() {
     });
 
 
-    //Listen for a click on an item
+    //Click on an item
     $(document).on("click", "#open-item", function() {
         //Retrieve the index of the item stored in its class
         var toSelect = $(this).attr('class');
@@ -105,7 +126,7 @@ $(document).ready( function() {
         pr.enter();
     });
 
-    //Listen for a click on a tab 
+    //Click on a tab 
     $("#tabs > a, #right > i").click(function() {
         id = $(this).attr("id");
         //Switch to the clicked tab
@@ -122,7 +143,7 @@ $(document).ready( function() {
         }
     });
 
-    //Listen for a click on search
+    //Click on search
     $('#search-button').click(function() {
         $('.search-input').toggleClass('search-input-animated');
         $('.search-input').focus();
@@ -130,7 +151,7 @@ $(document).ready( function() {
     $('.search-input').focusout(function() {
         $('.search-input').removeClass('search-input-animated');
     });
-    //Listen for enter when the search is focused
+    //Enter when the search is focused
     $(document).keypress(function(e) {
         if(e.which == 13 && $(".search-input").is(":focus")) {
             pr.filtersearch([$(".search-input").val()]);
@@ -138,6 +159,19 @@ $(document).ready( function() {
         }
     });
 
-
+    //Click on watch trailer or watch now
+    $(document).on("click", "#watch-now", function() {
+        pr.enter();
+    });
+    $(document).on("click", "#watch-trailer", function() {
+        pr.watchtrailer();
+    });
+    //Click on favourite or seen
+    $(document).on("click", "#toggle-favourite", function() {
+        pr.togglefavourite();
+    });
+    $(document).on("click", "#toggle-watched", function() {
+        pr.togglewatched();
+    });
 
 });
