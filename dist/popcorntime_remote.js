@@ -5,7 +5,7 @@
 
     This library is released under the GPL 3 license.
 */
-var popcorntime_remote = {
+var butter_remote = {
     //LIB PROPERTIES
     lib: this,
     isConnected: true,
@@ -46,7 +46,7 @@ var popcorntime_remote = {
                 if(callback) callback(data);
             } else {
  
-                lib.log("Connection time out: can't reach popcorn time. Try changing the settings.");
+                lib.log("Connection time out: can't reach butter. Try changing the settings.");
                 lib.isConnected = "false";
             }
           }
@@ -90,7 +90,7 @@ var popcorntime_remote = {
       return out;
     },
 
-    //POPCORNTIME METHODS
+    //BUTTER METHODS
     ping:               function(callback) { lib.APIcall("ping", false, callback); },
     enter:              function() { lib.APIcall("enter"); },
     back:               function() { lib.APIcall("back"); },
