@@ -1,5 +1,5 @@
 /*
-# This file is part of "Popcorn Time Remote Controller by Giacomo Cerquone".
+# This file is part of "Butter Remote Controller by Giacomo Cerquone".
 #
 # Copyright(c) 2015 Giacomo Cerquone
 # cerquone96@hotmail.it
@@ -9,18 +9,18 @@
 */
 $(document).ready( function() {
 
-    var pr = popcorntime_remote;
+    var bt = butter_remote;
 
     function getList() {
-        pr.getcurrenttab(function(data) { 
+        bt.getcurrenttab(function(data) { 
             tab = data.result.tab;
             //Delete the actual active tab
             $("#tabs a, #right i").removeClass("active");
             //Set active the chosen tab
             $("#tabs > #"+tab+", #right > #"+tab).addClass("active");
-            //Repeats the function until popcorntime loaded the items so that can respond correctly
+            //Repeats the function until butter loaded the items so that can respond correctly
             var interval = setInterval(function() {
-                pr.getcurrentlist(function(data) {
+                bt.getcurrentlist(function(data) {
                     //if errors are not returned
                     if(!data.error) {
                         var htmlList = "";
@@ -44,7 +44,7 @@ $(document).ready( function() {
 
     function itemDetails() {
         //Empty the item's list
-        pr.getselection(function(data) {
+        bt.getselection(function(data) {
             var cover, genres = '', playButtons = '';
             if(data.result.type=="movie" || data.result.type=="bookmarkedmovie") { 
                 cover = data.result.cover;
@@ -78,7 +78,7 @@ $(document).ready( function() {
         var usernameVal = ( !$("#username").val() ? "popcorn" : $("#username").val() );
         var passwordVal = ( !$("#password").val() ? "popcorn" : $("#password").val() );
 
-        pr.init({ ip:ipVal, port: portVal, username: usernameVal, password: passwordVal }, function(data) {
+        bt.init({ ip:ipVal, port: portVal, username: usernameVal, password: passwordVal }, function(data) {
             if(data.result) {
                 $("#login").hide();
                 $("#header").show();
@@ -88,7 +88,7 @@ $(document).ready( function() {
         });
 
         //Get the first viewstack
-        pr.getviewstack(function(data) {
+        bt.getviewstack(function(data) {
             view = data.result.viewstack[data.result.viewstack.length-1];
             if(view == "main-browser") {
                 getList();
@@ -101,7 +101,7 @@ $(document).ready( function() {
         //Lets repeat operations every second
         setInterval(function() {
             //Listen for notifications
-            pr.listennotifications(function(data) {
+            bt.listennotifications(function(data) {
                 if(data.result.events.viewstack) {
                     view = data.result.events.viewstack[data.result.events.viewstack.length-1];
                     if(view == "main-browser") {
@@ -122,8 +122,8 @@ $(document).ready( function() {
     $(document).on("click", "#open-item", function() {
         //Retrieve the index of the item stored in its class
         var toSelect = $(this).attr('class');
-        pr.setselection([toSelect]);
-        pr.enter();
+        bt.setselection([toSelect]);
+        bt.enter();
     });
 
     //Click on a tab 
@@ -131,15 +131,15 @@ $(document).ready( function() {
         id = $(this).attr("id");
         //Switch to the clicked tab
         if(id == "movies") { 
-            pr.movieslist(); 
+            bt.movieslist(); 
         } else if(id == "shows") {
-            pr.showslist(); 
+            bt.showslist(); 
         } else if(id == "anime") { 
-            pr.animelist(); 
+            bt.animelist(); 
         } else if(id == "Favorites") { 
-            pr.showfavourites(); 
+            bt.showfavourites(); 
         } else if(id == "Watchlist") { 
-            pr.showwatchlist(); 
+            bt.showwatchlist(); 
         }
     });
 
@@ -154,24 +154,24 @@ $(document).ready( function() {
     //Enter when the search is focused
     $(document).keypress(function(e) {
         if(e.which == 13 && $(".search-input").is(":focus")) {
-            pr.filtersearch([$(".search-input").val()]);
+            bt.filtersearch([$(".search-input").val()]);
             getList();
         }
     });
 
     //Click on watch trailer or watch now
     $(document).on("click", "#watch-now", function() {
-        pr.enter();
+        bt.enter();
     });
     $(document).on("click", "#watch-trailer", function() {
-        pr.watchtrailer();
+        bt.watchtrailer();
     });
     //Click on favourite or seen
     $(document).on("click", "#toggle-favourite", function() {
-        pr.togglefavourite();
+        bt.togglefavourite();
     });
     $(document).on("click", "#toggle-watched", function() {
-        pr.togglewatched();
+        bt.togglewatched();
     });
 
 });
