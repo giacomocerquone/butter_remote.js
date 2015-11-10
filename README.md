@@ -1,5 +1,5 @@
 # Butter Remote Controller by Giacomo Cerquone
-http://popremote.giacomocerquone.com<br>
+http://butter.giacomocerquone.com<br>
 This is the website which uses the library.<br>
 Of course both of them are developed by me.<br>
 
