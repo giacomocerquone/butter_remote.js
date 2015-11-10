@@ -1,7 +1,4 @@
-#DEPRECATED
-Popcorn Time is now closed, so I mark this as deprecated.
-
-# Popcorn Time Remote Controller by Giacomo Cerquone
+# Butter Remote Controller by Giacomo Cerquone
 http://popremote.giacomocerquone.com<br>
 This is the website which uses the library.<br>
 Of course both of them are developed by me.<br>
