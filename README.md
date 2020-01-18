@@ -42,7 +42,7 @@ butter_remote.ping();
 ##### Methods that need parameters to performs certain actions.<br>
 These are {listing methods}:<br>
 ```javascript
-butter_remote.filtergenres(["Adventure"]);
+butter_remote.filtergenre(["Adventure"]);
 ```
 ##### Methods which performs actions and return some data.<br>
 Here you have a callback function and the data can be accessed in this way:
